@@ -1,11 +1,9 @@
 package com.xanh;
 
-import models.Plant;
-import models.requests.UpdatePlantRequest;
+import com.xanh.models.Plant;
+import com.xanh.models.requests.UpdatePlantRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
