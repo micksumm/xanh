@@ -1,7 +1,7 @@
-package com.xanh;
+package com.xanh.controllers;
 
-import com.xanh.dal.PlantRepository;
-import com.xanh.models.Plant;
+import com.xanh.dal.IPlantRepository;
+import com.xanh.models.domain.Plant;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,21 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 public class PlantController {
-    private PlantRepository plantRepository;
+    private IPlantRepository plantRepository;
 
     @PostMapping("/plant/create")
     public Plant createPlant(@RequestParam(value = "name") String name,
                              @RequestParam(value = "sciName") String scientificName) {
         Plant plant = new Plant(name, scientificName);
-        plantRepository.createPlant(plant);
+
+        plantRepository.create(plant.toEntity());
+
         return plant;
     }
-
-//    @GetMapping(path="/all")
-//    public @ResponseBody Iterable<Plant> getAllPLants() {
-//        // This returns a JSON or XML with the users
-//        return plantRepository.findAll();
-//    }
 
 //    @GetMapping("/plants")
 //    public ArrayList<Plant> getPlants() {
