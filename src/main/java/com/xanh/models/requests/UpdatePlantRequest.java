@@ -1,6 +1,6 @@
-package models.requests;
+package com.xanh.models.requests;
 
-import models.Plant;
+import com.xanh.models.domain.Plant;
 
 public class UpdatePlantRequest {
     public String plantName;
