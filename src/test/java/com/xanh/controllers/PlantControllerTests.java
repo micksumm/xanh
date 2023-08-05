@@ -2,6 +2,8 @@ package com.xanh.controllers;
 
 import com.xanh.fakes.FakePlantRepository;
 import com.xanh.models.domain.Plant;
+import com.xanh.models.entities.PlantEntity;
+import com.xanh.models.requests.UpdatePlantRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -19,45 +21,45 @@ class PlantControllerTests {
 
     @Test
     public void createPlant_Valid_SuccessfullyCreated() {
-        Plant swissCheese = controller.createPlant(name, scientificName);
+        PlantEntity swissCheese = controller.createPlant(name, scientificName);
 
         assertEquals(name, swissCheese.getName());
         assertEquals(scientificName, swissCheese.getScientificName());
     }
 
-//    @Test
-//    public void getPlants_Valid_SuccessfullyRetrieved() {
-//        Plant swissCheese = controller.createPlant(name, scientificName);
-//        Plant chineseEvergreen = controller.createPlant(name2, scientificName2);
-//
-//        var plants = controller.getPlants();
-//
-//        assertEquals(2, plants.size());
-//        assertEquals(swissCheese.name, plants.get(0).name);
-//        assertEquals(chineseEvergreen.name, plants.get(1).name);
-//    }
-//
-//    @Test
-//    public void getPlant_Valid_SuccessfullyRetrieveOne() {
-//        Plant swissCheese = controller.createPlant(name, scientificName);
-//
-//        var plant = controller.getPlant("Swiss Cheese");
-//
-//        assertEquals(swissCheese.name, plant.name);
-//        assertEquals(swissCheese.scientificName, plant.scientificName);
-//    }
-//
-//    @Test
-//    public void editPlant_Valid_SuccessfullyEdited() {
-//        Plant swissCheese = controller.createPlant(name, scientificName);
-//        var updatedPlant = new Plant(name2, scientificName2);
-//        var request = new UpdatePlantRequest(swissCheese.name, updatedPlant);
-//
-//        var editedPlant = controller.editPlant(request);
-//
-//        assertEquals(updatedPlant.name, editedPlant.name);
-//        assertEquals(updatedPlant.scientificName, editedPlant.scientificName);
-//    }
+    @Test
+    public void getPlants_Valid_SuccessfullyRetrieved() {
+        PlantEntity swissCheese = controller.createPlant(name, scientificName);
+        PlantEntity chineseEvergreen = controller.createPlant(name2, scientificName2);
+
+        var plants = controller.getPlants();
+
+        assertEquals(2, plants.size());
+        assertEquals(swissCheese.getName(), plants.get(0).getName());
+        assertEquals(chineseEvergreen.getName(), plants.get(1).getName());
+    }
+
+    @Test
+    public void getPlant_Valid_SuccessfullyRetrieveOne() {
+        PlantEntity swissCheese = controller.createPlant(name, scientificName);
+
+        var plant = controller.getPlantById(swissCheese.getId());
+
+        assertEquals(swissCheese.getName(), plant.getName());
+        assertEquals(swissCheese.getScientificName(), plant.getScientificName());
+    }
+
+    @Test
+    public void editPlant_Valid_SuccessfullyEdited() {
+        PlantEntity swissCheese = controller.createPlant(name, scientificName);
+        var updatedPlant = new Plant(name2, scientificName2);
+        var request = new UpdatePlantRequest(swissCheese.getId(), updatedPlant.toEntity());
+
+        var editedPlant = controller.editPlant(request);
+
+        assertEquals(updatedPlant.getName(), editedPlant.getName());
+        assertEquals(updatedPlant.getScientificName(), editedPlant.getScientificName());
+    }
 //
 //    @Test
 //    public void deletePlant_Valid_SuccessfullyDeleted() {
