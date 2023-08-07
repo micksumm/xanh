@@ -16,7 +16,15 @@ public class Plant {
         this.scientificName = scientificName;
     }
 
+    public Plant(PlantEntity pe) {
+        this.name = pe.getName();
+        this.id = pe.getId();
+        this.scientificName = pe.getScientificName();
+    }
+
     public PlantEntity toEntity() {
         return new PlantEntity(id, name, scientificName);
     }
+
+
 }
