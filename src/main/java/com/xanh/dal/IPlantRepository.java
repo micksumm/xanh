@@ -10,4 +10,5 @@ public interface IPlantRepository {
     List<PlantEntity> getAllPlants();
     PlantEntity get(Long id);
     void update(UpdatePlantRequest request);
+    boolean delete(Long id);
 }

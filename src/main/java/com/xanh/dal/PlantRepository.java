@@ -62,6 +62,7 @@ public class PlantRepository implements IPlantRepository {
         return plants;
     }
 
+    @Override
     public PlantEntity get(Long id) {
         String sql = "SELECT name, scientific_name FROM plant WHERE id = ?";
         try (Connection conn = dataSource.getConnection();
@@ -83,6 +84,7 @@ public class PlantRepository implements IPlantRepository {
         return null; // Return null if the record with the specified id is not found
     }
 
+    @Override
     public void update(UpdatePlantRequest request) {
         String sql = "UPDATE plant SET name = ?, scientific_name = ? WHERE id = ?";
         try (Connection conn = dataSource.getConnection();
@@ -95,6 +97,21 @@ public class PlantRepository implements IPlantRepository {
             // Handle exception
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        String sql = "DELETE FROM plant WHERE id =?";
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setLong(1, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            // Handle exception
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }
 
