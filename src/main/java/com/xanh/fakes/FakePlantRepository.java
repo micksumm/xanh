@@ -41,4 +41,15 @@ public class FakePlantRepository implements IPlantRepository {
 
         plants.replace(plantToUpdate.getId(), plantToUpdate);
     }
+
+    @Override
+    public boolean delete(Long id) {
+        var plant = get(id);
+        if (plant == null) {
+            return false;
+        }
+        plants.remove(id);
+
+        return true;
+    }
 }

@@ -30,7 +30,7 @@ public class PlantController {
     }
 
     @GetMapping("/plant")
-    public PlantEntity getPlantById(@RequestParam(value = "id") Long id ) {
+    public PlantEntity getPlantById(@RequestParam(value = "id") Long id) {
         return plantRepository.get(id);
     }
 
@@ -39,14 +39,13 @@ public class PlantController {
         plantRepository.update(request);
         return request.getUpdatedPlant();
     }
-//
-//    @DeleteMapping("/plant/delete")
-//    public ArrayList<Plant> deletePlant(@RequestParam(value = "name") String name) {
-//        for (Plant plant : plants) {
-//            if (plant.name.equals(name)) {
-//                plants.remove(plant);
-//            }
-//        }
-//        return plants;
-//    }
+
+    @DeleteMapping("/plant/delete")
+    public Boolean deletePlant(@RequestParam(value = "id") Long id) {
+        if (getPlantById(id) == null) {
+            return false;
+        } else {
+            return plantRepository.delete(id);
+        }
+    }
 }

@@ -7,7 +7,7 @@ import com.xanh.models.requests.UpdatePlantRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class PlantControllerTests {
@@ -60,18 +60,18 @@ class PlantControllerTests {
         assertEquals(updatedPlant.getName(), editedPlant.getName());
         assertEquals(updatedPlant.getScientificName(), editedPlant.getScientificName());
     }
-//
-//    @Test
-//    public void deletePlant_Valid_SuccessfullyDeleted() {
-//        Plant swissCheese = controller.createPlant(name, scientificName);
-//        Plant chineseEvergreen = controller.createPlant(name2, scientificName2);
-//
-//        var leftoverPlants = controller.deletePlant("Swiss Cheese");
-//
-//
-//        assertEquals( 1, leftoverPlants.size());
-//        assertEquals(chineseEvergreen.name, leftoverPlants.get(0).name);
-//        assertEquals(chineseEvergreen.scientificName, leftoverPlants.get(0).scientificName);
-//    }
+
+    @Test
+    public void deletePlant_NullPlant_ReturnsFalse() {
+        assertFalse(controller.deletePlant(9000L));
+    }
+
+    @Test
+    public void deletePlant_Valid_SuccessfullyDeleted() {
+        PlantEntity swissCheese = controller.createPlant(name, scientificName);
+        PlantEntity chineseEvergreen = controller.createPlant(name2, scientificName2);
+
+        assertTrue(controller.deletePlant(swissCheese.getId()));
+    }
 
 }
