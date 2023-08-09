@@ -5,4 +5,4 @@ CREATE TABLE plant (
 );
 
 INSERT INTO plant (name, scientific_name) VALUES ('Monstera', 'Monstera deliciosa');
-INSERT INTO plant (name, scientific_name) VALUES ('Rubber Tree', 'Hevea brasiliensis');
+INSERT INTO plant (name, scientific_name) VALUES ('Rubber Tree', 'Ficus elastica');
